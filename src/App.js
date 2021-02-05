@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./App.scss";
 import Container from 'react-bootstrap/Container'
-import PersonTable from "./PersonTable";
-import Form from './Form'
+import PersonTable from "./Components/PersonTable";
+import Form from './Components/Form'
 
 class App extends Component {
   removeCharacter = (index) => {
