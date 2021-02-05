@@ -20,10 +20,10 @@ const TableBody = (props) => {
       <tr key={index}>
         <td>{row.name}</td>
         <td>
-          <Button >Show details</Button>
+          <Button onClick={() => props.openDetails(index)}>Show details</Button>
         </td>
         <td>
-          <Button variant="danger" onClick={()=> props.removeCharacter(index)}>Delete</Button>
+          <Button variant="danger" onClick={() => props.removeCharacter(index)}>Delete</Button>
         </td>
       </tr>
     )
@@ -33,13 +33,14 @@ const TableBody = (props) => {
 }
 
 const PersonTable = (props) =>{
-   const {characterData, removeCharacter} = props
+   const {characterData, removeCharacter, openDetails} = props
 
     return (
       <Table striped bordered hover>
         <TableHeader />
         <TableBody characterData={characterData}
-        removeCharacter={removeCharacter}/>
+        removeCharacter={removeCharacter}
+        openDetails={openDetails}/>
       </Table>
     )
 }

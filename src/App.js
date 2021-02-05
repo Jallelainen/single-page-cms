@@ -23,6 +23,8 @@ class App extends Component {
 
   handleSubmit = (character) => {
     this.setState({ characters: [...this.state.characters, character] });
+    console.log(character)
+    this.setState({ showCreate: false });
   };
 
   openCreate = () => {
@@ -35,9 +37,16 @@ class App extends Component {
       if(showCreate === true && showDetails === false) {
         this.setState({ showCreate: false, createBtn: "Create Person" });
       } else if (showCreate === false && showDetails === true){
-        this.setState({ showCreate: true, showDetails: false,  createBtn: "Close" });
+        this.setState({ showDetails: false, showCreate: true,  createBtn: "Close" });
       }
     }
+  };
+
+  openDetails = (index) => {
+    
+    this.setState({ personId: index, showCreate: false, showDetails: true })
+    const { characters } = this.state;
+    console.log(characters[index])
   };
 
   state = {
@@ -45,10 +54,11 @@ class App extends Component {
     showCreate: false,
     createBtn: "Create Person",
     showDetails: false,
+    personId: '',
   };
 
   render() {
-    const { characters, createBtn } = this.state;
+    const { characters, createBtn, personId } = this.state;
 
     return (
       <Container>
@@ -57,6 +67,7 @@ class App extends Component {
             <PersonTable
               characterData={characters}
               removeCharacter={this.removeCharacter}
+              openDetails={this.openDetails}
             />
             <Button variant="primary" onClick={this.openCreate}>
               {createBtn}
@@ -72,7 +83,7 @@ class App extends Component {
         ) : this.state.showDetails ? (
           <Row>
             <Col>
-              <Details />
+              <Details person={characters[personId]}/>
             </Col>
           </Row>
         ) : (
