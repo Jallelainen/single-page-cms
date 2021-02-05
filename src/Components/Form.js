@@ -11,9 +11,20 @@ class Form extends Component {
   handleChange = (event) => {
     const { value } = event.target;
 
-    this.setState({
-      name: value,
-    });
+    console.log(event)
+    if (event.target.id === "name"){
+      this.setState({
+        name: value,
+      });
+    } else if (event.target.id === "city"){
+      this.setState({
+        city: value,
+      });
+    } else if (event.target.id === "country"){
+      this.setState({
+        country: value,
+      });
+    }
   };
 
   handleLanguages = (event) => {
@@ -22,14 +33,6 @@ class Form extends Component {
 
     for (let i = 0; i < this.state.languages.length; i++) {
       if (value === this.state.languages[i]) {
-        // console.log("yessombär")
-        // this.setState((prevState) => {
-        //   return {
-        //     languages: [...prevState.languages.filter((language) => {
-        //       return language !== this.state.languages[i]
-        //     })]
-        //   }
-        // });
 
         let filteredArray = this.state.languages.filter(
           language => language !== value
@@ -87,10 +90,9 @@ class Form extends Component {
             onChange={this.handleChange}
           />
         </div>
-        Language{languages}
         <div className="form-group">
           <label htmlFor="language">
-            Language (ctrl + click to select more than one)
+            Language(s)
           </label>
           <select
             multiple
