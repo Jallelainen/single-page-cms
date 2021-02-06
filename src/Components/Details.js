@@ -3,36 +3,42 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button"
 
-const Details = (person) => {
-  const { name, city, country } = person;
-    const listItems = person.languages.map((item) => {
-      return (<li>{item}</li>)
+const Details = (props) => {
+  const { name, city, country, languages } = props.person;
+  const { detailsBtn } = props; 
+  console.log(detailsBtn)
+    const listItems = languages.map((item, index) => {
+      return (<li key={index}>{item}</li>)
     });
 
   return (
     <Container>
       <Row>
-        <Col>
+        <Col className="shadow-sm p-4 mb-4 bg-white">
           <h2>{name}</h2>
         </Col>
       </Row>
       <Row>
         <Col>
-          <h4>City:</h4>
+          <h5>City:</h5>
           <p>{city}</p>
         </Col>
         <Col>
-          <h4>Country:</h4>
+          <h5>Country:</h5>
           <p>{country}</p>
         </Col>
       </Row>
       <Row>
         <Col>
-          <h4>Language(s):</h4>
+          <h5>Language(s):</h5>
           <ul>
             {listItems}
           </ul>
+        </Col>
+        <Col>
+            <Button onClick={() => props.closeDetails()}>{detailsBtn}</Button>
         </Col>
       </Row>
     </Container>

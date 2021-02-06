@@ -23,8 +23,7 @@ class App extends Component {
 
   handleSubmit = (character) => {
     this.setState({ characters: [...this.state.characters, character] });
-    console.log(character)
-    this.setState({ showCreate: false });
+    this.setState({ createBtn: "Create Person", showCreate: false  });
   };
 
   openCreate = () => {
@@ -44,9 +43,14 @@ class App extends Component {
 
   openDetails = (index) => {
     
-    this.setState({ personId: index, showCreate: false, showDetails: true })
-    const { characters } = this.state;
-    console.log(characters[index])
+    this.setState({ personId: index, showCreate: false, showDetails: true, detailsBtn: "Close", createBtn: "Create Person" })
+
+  };
+
+  closeDetails = () => {
+    
+    this.setState({ showCreate: false, showDetails: false, detailsBtn: "Show Details", createBtn: "Create Person" })
+
   };
 
   state = {
@@ -54,15 +58,16 @@ class App extends Component {
     showCreate: false,
     createBtn: "Create Person",
     showDetails: false,
+    detailsBtn: "Show Details",
     personId: '',
   };
 
   render() {
-    const { characters, createBtn, personId } = this.state;
+    const { characters, createBtn, personId, detailsBtn } = this.state;
 
     return (
       <Container>
-        <Row>
+        <Row className="shadow p-4 mb-4 bg-white">
           <Col>
             <PersonTable
               characterData={characters}
@@ -75,15 +80,18 @@ class App extends Component {
           </Col>
         </Row>
         {this.state.showCreate ? (
-          <Row>
+          <Row className="shadow p-4 mb-4 bg-white">
             <Col>
               <Form handleSubmit={this.handleSubmit} />
             </Col>
           </Row>
         ) : this.state.showDetails ? (
-          <Row>
+          <Row className="shadow p-4 mb-4 bg-white">
             <Col>
-              <Details person={characters[personId]}/>
+              <Details 
+              person={characters[personId]}
+              detailsBtn={detailsBtn}
+              closeDetails={this.closeDetails}/>
             </Col>
           </Row>
         ) : (
