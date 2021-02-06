@@ -7,9 +7,8 @@ import Button from "react-bootstrap/Button"
 
 const Details = (props) => {
   const { name, city, country, languages } = props.person;
-  const { detailsBtn } = props; 
-  console.log(detailsBtn)
-    const listItems = languages.map((item, index) => {
+  const { detailsBtn, personId } = props; 
+  const listItems = languages.map((item, index) => {
       return (<li key={index}>{item}</li>)
     });
 
@@ -39,9 +38,11 @@ const Details = (props) => {
         </Col>
         <Col>
             <Button onClick={() => props.closeDetails()}>{detailsBtn}</Button>
+            <Button variant="secondary" onClick={() => props.openEdit(personId)}>Edit</Button>
         </Col>
       </Row>
     </Container>
   );
 };
+
 export default Details;

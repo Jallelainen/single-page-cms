@@ -9,23 +9,12 @@ class Form extends Component {
   };
 
   handleChange = (event) => {
-    const { value } = event.target;
-
-    console.log(event)
-    if (event.target.id === "name"){
+    const { name, value } = event.target;
+        
       this.setState({
-        name: value,
-      });
-    } else if (event.target.id === "city"){
-      this.setState({
-        city: value,
-      });
-    } else if (event.target.id === "country"){
-      this.setState({
-        country: value,
+        [name]: value,   
       });
     }
-  };
 
   handleLanguages = (event) => {
     console.log(event.target.value);

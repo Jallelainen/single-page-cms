@@ -9,6 +9,7 @@ import Button from "react-bootstrap/Button";
 import PersonTable from "./Components/PersonTable";
 import Form from "./Components/Form";
 import Details from "./Components/Details";
+import Edit from './Components/Edit'
 
 class App extends Component {
   removeCharacter = (index) => {
@@ -26,6 +27,10 @@ class App extends Component {
     this.setState({ createBtn: "Create Person", showCreate: false  });
   };
 
+  editSubmit = (character) => {
+
+  }
+
   openCreate = () => {
     const { showCreate, showDetails } = this.state;
 
@@ -42,16 +47,18 @@ class App extends Component {
   };
 
   openDetails = (index) => {
-    
     this.setState({ personId: index, showCreate: false, showDetails: true, detailsBtn: "Close", createBtn: "Create Person" })
 
   };
 
   closeDetails = () => {
-    
-    this.setState({ showCreate: false, showDetails: false, detailsBtn: "Show Details", createBtn: "Create Person" })
+    this.setState({ showCreate: false, showDetails: false, createBtn: "Create Person" })
 
   };
+
+  openEdit = (index) => {
+    this.setState({ personId: index, showDetails: false, showEdit: true })
+  }
 
   state = {
     characters: [],
@@ -59,6 +66,7 @@ class App extends Component {
     createBtn: "Create Person",
     showDetails: false,
     detailsBtn: "Show Details",
+    showEdit: false,
     personId: '',
   };
 
@@ -90,8 +98,19 @@ class App extends Component {
             <Col>
               <Details 
               person={characters[personId]}
+              personId={personId}
               detailsBtn={detailsBtn}
-              closeDetails={this.closeDetails}/>
+              closeDetails={this.closeDetails}
+              openEdit={this.openEdit}/>
+            </Col>
+          </Row>
+        ) : this.state.showEdit ? (
+          <Row>
+            <Col>
+              <Edit
+              person={characters[personId]}
+              editSubmit={this.editSubmit}
+              />
             </Col>
           </Row>
         ) : (
