@@ -37,8 +37,8 @@ const Details = (props) => {
           </ul>
         </Col>
         <Col>
+            <Button className="mr-2" variant="secondary" onClick={() => props.openEdit(personId)}>Edit</Button>
             <Button onClick={() => props.closeDetails()}>{detailsBtn}</Button>
-            <Button variant="secondary" onClick={() => props.openEdit(personId)}>Edit</Button>
         </Col>
       </Row>
     </Container>
