@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 
 const Footer = () => {
     const year = new Date().getFullYear();
+    
   return (
     <Row>
         <div className="spacer"></div>
