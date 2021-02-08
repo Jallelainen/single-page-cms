@@ -27,8 +27,9 @@ class App extends Component {
     this.setState({ createBtn: "Create Person", showCreate: false  });
   };
 
-  editSubmit = (character) => {
-
+  editSubmit = (newCharacter, personId) => {
+    this.setState( this.state.characters.splice(personId, 1, newCharacter) 
+    );
   }
 
   openCreate = () => {
@@ -39,9 +40,9 @@ class App extends Component {
 
     } else {
       if(showCreate === true && showDetails === false) {
-        this.setState({ showCreate: false, createBtn: "Create Person" });
+        this.setState({ showCreate: false, showEdit: false, createBtn: "Create Person" });
       } else if (showCreate === false && showDetails === true){
-        this.setState({ showDetails: false, showCreate: true,  createBtn: "Close" });
+        this.setState({ showDetails: false, showCreate: true, showEdit: false, createBtn: "Close" });
       }
     }
   };
@@ -52,7 +53,7 @@ class App extends Component {
   };
 
   closeDetails = () => {
-    this.setState({ showCreate: false, showDetails: false, createBtn: "Create Person" })
+    this.setState({ showCreate: false, showDetails: false, showEdit: false, createBtn: "Create Person" })
 
   };
 
@@ -101,6 +102,7 @@ class App extends Component {
               personId={personId}
               detailsBtn={detailsBtn}
               closeDetails={this.closeDetails}
+              
               openEdit={this.openEdit}/>
             </Col>
           </Row>
@@ -109,6 +111,8 @@ class App extends Component {
             <Col>
               <Edit
               person={characters[personId]}
+              personId={personId}
+              openDetails={this.openDetails}
               editSubmit={this.editSubmit}
               />
             </Col>

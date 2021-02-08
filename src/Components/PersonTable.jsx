@@ -20,7 +20,7 @@ const TableBody = (props) => {
       <tr key={index}>
         <td>{row.name}</td>
         <td>
-          <Button onClick={() => props.openDetails(index)}>Show details</Button>
+          <Button variant="secondary" onClick={() => props.openDetails(index)}>Show details</Button>
         </td>
         <td>
           <Button variant="danger" onClick={() => props.removeCharacter(index)}>Delete</Button>

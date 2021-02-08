@@ -4,7 +4,6 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
 class Edit extends Component {
-    
   state = {
     name: this.props.person.name,
     city: this.props.person.city,
@@ -26,26 +25,25 @@ class Edit extends Component {
 
     for (let i = 0; i < languages.length; i++) {
       if (value === languages[i]) {
-
-        let filteredArray = languages.filter(
-          language => language !== value
-        )
-        this.setState({languages: filteredArray})
-        return
+        let filteredArray = languages.filter((language) => language !== value);
+        this.setState({ languages: filteredArray });
+        return;
       }
     }
 
     this.setState((prevState) => ({
-        languages: [...prevState.languages, value],
-      }));
-    };
+      languages: [...prevState.languages, value],
+    }));
+  };
 
-    submitForm = () => {
-        this.props.editSubmit(this.state);
-      };
+  submitForm = () => {
+    const { personId } = this.props;
+    this.props.editSubmit(this.state, personId);
+    this.props.openDetails(personId);
+  };
 
   render() {
-    console.log(this.state)
+    console.log(this.state);
     const { name, city, country, languages } = this.state;
 
     return (
@@ -106,7 +104,7 @@ class Edit extends Component {
         </div>
         <div className="form-row">
           <Col>
-            <Button>Save</Button>
+            <Button onClick={this.submitForm}>Save</Button>
           </Col>
         </div>
       </form>
