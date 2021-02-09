@@ -16,10 +16,10 @@ const TableHeader = () => {
 };
 
 const TableBody = (props) => {
-  const rows = props.characterData.map((row, index) => {
+  const rows = props.characterData.map((person, index) => {
     return (
       <tr key={index}>
-        <td>{row.name}</td>
+        <td>{person.name}</td>
         <td>
           <Button variant="secondary" onClick={() => props.openDetails(index)}>
             Show details

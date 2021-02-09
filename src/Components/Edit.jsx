@@ -45,6 +45,10 @@ class Edit extends Component {
   render() {
     console.log(this.state);
     const { name, city, country, languages } = this.state;
+    //const { languages } = this.props.languages;
+    const listItems = languages.map((item, index) => {
+      return (<option key={index} value={item}>{item}</option>)
+    });
 
     return (
       <form>
@@ -95,11 +99,7 @@ class Edit extends Component {
               value={languages}
               onClick={this.handleLanguages}
             >
-              <option value="Swedish">Swedish</option>
-              <option value="Norwegian">Norwegian</option>
-              <option value="Finnish">Finnish</option>
-              <option value="Arabic">Arabic</option>
-              <option value="Urdu">Urdu</option>
+              {listItems}
             </select>
           </Col>
         </div>

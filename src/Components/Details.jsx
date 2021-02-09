@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button"
 
 const Details = (props) => {
-  const { name, city, country, languages } = props.person;
+  const { name, city, phoneNum, languages } = props.person;
   const { detailsBtn, personId } = props; 
   const listItems = languages.map((item, index) => {
       return (<li key={index}>{item}</li>)
@@ -25,8 +25,8 @@ const Details = (props) => {
           <p>{city}</p>
         </Col>
         <Col>
-          <h5>Country:</h5>
-          <p>{country}</p>
+          <h5>Phone Number:</h5>
+          <p>{phoneNum}</p>
         </Col>
       </Row>
       <Row>

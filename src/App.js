@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import peopleService from './API/PeopleService'
 import "./App.scss";
 //----------BOOTSTRAP----------
 import Container from "react-bootstrap/Container";
@@ -14,6 +15,27 @@ import Details from "./Components/Details";
 import Edit from "./Components/Edit";
 
 class App extends Component {
+
+  state = {
+    characters: [],
+    languages: [],
+    showCreate: false,
+    createBtn: "Create Person",
+    showDetails: false,
+    detailsBtn: "Show Details",
+    showEdit: false,
+    personId: 0,
+  };
+
+  // async componentDidMount() {
+  //   let peopleAndLanguages = await peopleService.getAll();
+  //   console.log("componentDidMount");
+  //   this.setState({
+  //     characters: peopleAndLanguages.peopleList,
+  //     languages: peopleAndLanguages.Languages
+  //   })
+  // }
+
   removeCharacter = (index) => {
     const { characters } = this.state;
 
@@ -24,7 +46,20 @@ class App extends Component {
     });
   };
 
-  handleSubmit = (character) => {
+  handleSubmit = async (character) => {
+    // console.log(character)
+    // let newPerson = await peopleService.createPerson(character);
+    // let peopleList = await peopleService.getAll();
+
+    // console.log("response: ", newPerson)
+    // this.setState({
+    //     characters: peopleList,
+    //     showCreate: false,
+    //     createBtn: "Create Person"
+    // })
+    var data = JSON.stringify(character);
+    console.log(data);
+
     this.setState({ characters: [...this.state.characters, character] });
     this.setState({ createBtn: "Create Person", showCreate: false });
   };
@@ -83,18 +118,9 @@ class App extends Component {
     this.setState({ personId: index, showDetails: false, showEdit: true });
   };
 
-  state = {
-    characters: [],
-    showCreate: false,
-    createBtn: "Create Person",
-    showDetails: false,
-    detailsBtn: "Show Details",
-    showEdit: false,
-    personId: 0,
-  };
 
   render() {
-    const { characters, createBtn, personId, detailsBtn } = this.state;
+    const { characters, createBtn, personId, detailsBtn, languages } = this.state;
 
     return (
       <Container fluid>
@@ -116,7 +142,9 @@ class App extends Component {
           {this.state.showCreate ? (
             <Row className="shadow p-4 mb-4 bg-white">
               <Col>
-                <Form handleSubmit={this.handleSubmit} />
+                <Form 
+                handleSubmit={this.handleSubmit} 
+                languages={languages}/>
               </Col>
             </Row>
           ) : this.state.showDetails ? (
@@ -136,6 +164,7 @@ class App extends Component {
               <Col>
                 <Edit
                   person={characters[personId]}
+                  languages={this.languages}
                   personId={personId}
                   openDetails={this.openDetails}
                   editSubmit={this.editSubmit}
