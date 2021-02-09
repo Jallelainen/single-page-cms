@@ -102,6 +102,7 @@ class App extends Component {
         <Container>
           <Row className="shadow p-4 mb-4 bg-white">
             <Col>
+            <h4>Person index:</h4>
               <PersonTable
                 characterData={characters}
                 removeCharacter={this.removeCharacter}
@@ -131,7 +132,7 @@ class App extends Component {
               </Col>
             </Row>
           ) : this.state.showEdit ? (
-            <Row>
+            <Row className="shadow p-4 mb-4 bg-white">
               <Col>
                 <Edit
                   person={characters[personId]}

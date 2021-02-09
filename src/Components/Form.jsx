@@ -46,6 +46,7 @@ class Form extends Component {
 
     return (
       <form>
+        <h4>Create new person</h4>
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input

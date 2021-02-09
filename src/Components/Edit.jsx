@@ -48,6 +48,7 @@ class Edit extends Component {
 
     return (
       <form>
+          <h4>Edit person</h4>
         <div className="form-row">
           <Col>
             <label htmlFor="name">Name</label>
