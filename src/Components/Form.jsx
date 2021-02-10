@@ -4,7 +4,7 @@ class Form extends Component {
   state = {
     name: "",
     city: "",
-    country: "",
+    phoneNum: "",
     languages: ["Swedish", "Norweigian"],
   };
 
@@ -42,7 +42,7 @@ class Form extends Component {
   };
 
   render() {
-    const { name, city, country, languages } = this.state;
+    const { name, city, phoneNum, languages } = this.state;
     //const { languages } = this.props.languages;
     const listItems = languages.map((item, index) => {
       return (<option key={index} value={item}>{item}</option>)
@@ -74,13 +74,13 @@ class Form extends Component {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="country">Country</label>
+          <label htmlFor="phoneNum">Phone number:</label>
           <input
             className="form-control"
             type="text"
-            name="country"
-            id="country"
-            value={country}
+            name="phoneNum"
+            id="phoneNum"
+            value={phoneNum}
             onChange={this.handleChange}
           />
         </div>

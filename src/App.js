@@ -27,14 +27,14 @@ class App extends Component {
     personId: 0,
   };
 
-  // async componentDidMount() {
-  //   let peopleAndLanguages = await peopleService.getAll();
-  //   console.log("componentDidMount");
-  //   this.setState({
-  //     characters: peopleAndLanguages.peopleList,
-  //     languages: peopleAndLanguages.Languages
-  //   })
-  // }
+  async componentDidMount() {
+    let peopleAndLanguages = await peopleService.getAll();
+    console.log("componentDidMount", peopleAndLanguages);
+    this.setState({
+      characters: peopleAndLanguages.peopleList,
+      languages: peopleAndLanguages.Languages
+    })
+  }
 
   removeCharacter = (index) => {
     const { characters } = this.state;
