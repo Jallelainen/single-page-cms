@@ -92,11 +92,10 @@ class App extends Component {
         });
       }
     }
-    console.log(this.state)
   };
 
   openDetails = async (index) => {
-    const fetchedPerson = await peopleService.getPerson(index);
+    let fetchedPerson = await peopleService.getPerson(index);
     console.log(fetchedPerson)
 
     this.setState({
@@ -124,7 +123,6 @@ class App extends Component {
 
 
   render() {
-    console.log(this.state)
     const { 
       characters, 
       createBtn,
