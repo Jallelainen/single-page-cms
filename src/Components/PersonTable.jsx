@@ -16,17 +16,17 @@ const TableHeader = () => {
 };
 
 const TableBody = (props) => {
-  const rows = props.characterData.map((person, index) => {
+  const rows = props.characterData.map((person) => {
     return (
-      <tr key={index}>
+      <tr key={person.id}>
         <td>{person.name}</td>
         <td>
-          <Button variant="secondary" onClick={() => props.openDetails(index)}>
+          <Button variant="secondary" onClick={() => props.openDetails(person.id)}>
             Show details
           </Button>
         </td>
         <td>
-          <Button variant="danger" onClick={() => props.removeCharacter(index)}>
+          <Button variant="danger" onClick={() => props.removeCharacter(person.id)}>
             Delete
           </Button>
         </td>

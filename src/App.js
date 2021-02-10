@@ -19,6 +19,7 @@ class App extends Component {
   state = {
     characters: [],
     languages: [],
+    person:[],
     showCreate: false,
     createBtn: "Create Person",
     showDetails: false,
@@ -57,8 +58,6 @@ class App extends Component {
     //     showCreate: false,
     //     createBtn: "Create Person"
     // })
-    var data = JSON.stringify(character);
-    console.log(data);
 
     this.setState({ characters: [...this.state.characters, character] });
     this.setState({ createBtn: "Create Person", showCreate: false });
@@ -96,8 +95,12 @@ class App extends Component {
   };
 
   openDetails = (index) => {
+    var fetchedPerson = peopleService.getPerson(index);
+    console.log(fetchedPerson)
+
     this.setState({
       personId: index,
+      person: [fetchedPerson],
       showCreate: false,
       showDetails: true,
       detailsBtn: "Close",
@@ -120,7 +123,14 @@ class App extends Component {
 
 
   render() {
-    const { characters, createBtn, personId, detailsBtn, languages } = this.state;
+    const { 
+      characters, 
+      createBtn,
+      personId, 
+      detailsBtn, 
+      languages, 
+      person 
+    } = this.state;
 
     return (
       <Container fluid>
@@ -151,7 +161,7 @@ class App extends Component {
             <Row className="shadow p-4 mb-4 bg-white">
               <Col>
                 <Details
-                  person={characters[personId]}
+                  person={person[0]}
                   personId={personId}
                   detailsBtn={detailsBtn}
                   closeDetails={this.closeDetails}

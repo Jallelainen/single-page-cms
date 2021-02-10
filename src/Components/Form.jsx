@@ -5,7 +5,7 @@ class Form extends Component {
     name: "",
     city: "",
     phoneNum: "",
-    languages: ["Swedish", "Norweigian"],
+    languages: [],
   };
 
   handleChange = (event) => {
@@ -41,9 +41,11 @@ class Form extends Component {
     this.setState(this.initialState);
   };
 
-  render() {
-    const { name, city, phoneNum, languages } = this.state;
-    //const { languages } = this.props.languages;
+  render() {    
+    const { name, city, phoneNum } = this.state;
+    const { languages } = this.props;
+
+    console.log(this.props)
     const listItems = languages.map((item, index) => {
       return (<option key={index} value={item}>{item}</option>)
     });

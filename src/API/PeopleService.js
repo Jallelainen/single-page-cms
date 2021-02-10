@@ -17,16 +17,17 @@ class peopleService {
   }
 
   async getPerson(id) {
+    axios.defaults.headers.get['Content-Type'] = 'application/json;charset=utf-8';
+
     return await axios
       .get("https://localhost:44331/api/React/" + id)
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
         return response.data;
       })
       .catch((error) => {
         console.log(error);
       })
-      .then(() => {});
   }
 
   async createPerson(personData) {
