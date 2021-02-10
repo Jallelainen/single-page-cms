@@ -92,6 +92,7 @@ class App extends Component {
         });
       }
     }
+    console.log(this.state)
   };
 
   openDetails = async (index) => {
@@ -123,6 +124,7 @@ class App extends Component {
 
 
   render() {
+    console.log(this.state)
     const { 
       characters, 
       createBtn,
