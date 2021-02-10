@@ -33,7 +33,7 @@ class App extends Component {
     console.log("componentDidMount", peopleAndLanguages);
     this.setState({
       characters: peopleAndLanguages.peopleList,
-      languages: peopleAndLanguages.Languages
+      languages: peopleAndLanguages.languages
     })
   }
 
@@ -48,19 +48,19 @@ class App extends Component {
   };
 
   handleSubmit = async (character) => {
-    // console.log(character)
-    // let newPerson = await peopleService.createPerson(character);
-    // let peopleList = await peopleService.getAll();
+    console.log(character)
+    let newPerson = await peopleService.createPerson(character);
+    let peopleList = await peopleService.getAll();
 
-    // console.log("response: ", newPerson)
-    // this.setState({
-    //     characters: peopleList,
-    //     showCreate: false,
-    //     createBtn: "Create Person"
-    // })
+    console.log("response: ", newPerson)
+    this.setState({
+        characters: peopleList,
+        showCreate: false,
+        createBtn: "Create Person"
+    })
 
-    this.setState({ characters: [...this.state.characters, character] });
-    this.setState({ createBtn: "Create Person", showCreate: false });
+    // this.setState({ characters: [...this.state.characters, character] });
+    // this.setState({ createBtn: "Create Person", showCreate: false });
   };
 
   editSubmit = (newCharacter, personId) => {
@@ -94,8 +94,8 @@ class App extends Component {
     }
   };
 
-  openDetails = (index) => {
-    var fetchedPerson = peopleService.getPerson(index);
+  openDetails = async (index) => {
+    const fetchedPerson = await peopleService.getPerson(index);
     console.log(fetchedPerson)
 
     this.setState({

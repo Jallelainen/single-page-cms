@@ -28,6 +28,7 @@ class peopleService {
       .catch((error) => {
         console.log(error);
       })
+      .then(() => {})
   }
 
   async createPerson(personData) {

@@ -5,7 +5,7 @@ class Form extends Component {
     name: "",
     city: "",
     phoneNum: "",
-    languages: [],
+    personLanguages: [],
   };
 
   handleChange = (event) => {
@@ -20,13 +20,13 @@ class Form extends Component {
     console.log(event.target.value);
     const { value } = event.target;
 
-    for (let i = 0; i < this.state.languages.length; i++) {
-      if (value === this.state.languages[i]) {
+    for (let i = 0; i < this.state.personLanguages.length; i++) {
+      if (value === this.state.personLanguages[i]) {
 
-        let filteredArray = this.state.languages.filter(
+        let filteredArray = this.state.personLanguages.filter(
           language => language !== value
         )
-        this.setState({languages: filteredArray})
+        this.setState({ personLanguages: filteredArray})
         return
       }
     }
@@ -45,7 +45,6 @@ class Form extends Component {
     const { name, city, phoneNum } = this.state;
     const { languages } = this.props;
 
-    console.log(this.props)
     const listItems = languages.map((item, index) => {
       return (<option key={index} value={item}>{item}</option>)
     });
