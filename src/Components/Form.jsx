@@ -5,14 +5,16 @@ class Form extends Component {
     name: "",
     city: this.props.cities[0].id,
     language: this.props.languages[0].id,
+    nameIsValid: true,
+    errorMessage: "",
   };
 
   handleChange = (event) => {
     const { name, value } = event.target;
-        
-      this.setState({
-        [name]: value,   
-      });
+
+    this.setState({
+      [name]: value,   
+    });
     }
 
   // handleLanguages = (event) => {
@@ -41,7 +43,7 @@ class Form extends Component {
   };
 
   render() {    
-    const { name, city, language } = this.state;
+    const { name, city, language, errorMessage } = this.state;
     const { languages, cities } = this.props;
 
     const languageItems = languages.map((item, index) => {
@@ -52,13 +54,12 @@ class Form extends Component {
       return (<option key={index} value={item.id}>{item.name}</option>)
     });
 
-    console.log(this.state)
     return (
       <form>
         <h4>Create new person</h4>
         <div className="form-group">
           <label htmlFor="name">Name</label>
-          <input
+          <input required
             className="form-control"
             type="text"
             name="name"
@@ -66,6 +67,7 @@ class Form extends Component {
             value={name}
             onChange={this.handleChange}
           />
+          <span>{errorMessage}</span>
         </div>
         <div className="form-group">
           <label htmlFor="city">City</label>
@@ -107,7 +109,7 @@ class Form extends Component {
         <div className="form-group">
           <input
             className="btn btn-primary"
-            type="button"
+            type="submit"
             value="Submit"
             onClick={this.submitForm}
           />

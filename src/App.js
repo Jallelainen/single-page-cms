@@ -28,7 +28,7 @@ class App extends Component {
     showEdit: false,
     personId: 0,
     sortByAlpha: false,
-    sortBtn: "Name"
+    sortBtn: "Index"
   };
 
   async componentDidMount() {
@@ -53,30 +53,18 @@ class App extends Component {
       languages: peopleAndLanguages.languages
     })
     }
-
-    // const { characters } = this.state;
-
-    // this.setState({
-    //   characters: characters.filter((characters, i) => {
-    //     return i !== index;
-    //   }),
-    // });
   };
 
   handleSubmit = async (character) => {
-    console.log(character)
-    let newPerson = await peopleService.createPerson(character);
+    let response = await peopleService.createPerson(character);
     let peopleAndLanguages = await peopleService.getAll();
 
-    console.log("response: ", newPerson)
+    console.log("response: ", response)
     this.setState({
         characters: peopleAndLanguages.peopleList,
         showCreate: false,
         createBtn: "Create Person"
     })
-
-    // this.setState({ characters: [...this.state.characters, character] });
-    // this.setState({ createBtn: "Create Person", showCreate: false });
   };
 
   editSubmit = (newCharacter, personId) => {
@@ -141,12 +129,10 @@ class App extends Component {
     const {sortByAlpha} = this.state;
 
     if(sortByAlpha === false){
-      this.setState({ sortByAlpha: true, sortBtn: "Database" })
-      console.log(sortByAlpha)
+      this.setState({ sortByAlpha: true, sortBtn: "Name" })
     }
     else{
-      this.setState({ sortByAlpha: false, sortBtn: "Name" })
-      console.log(sortByAlpha)
+      this.setState({ sortByAlpha: false, sortBtn: "Index" })
     }
   }
 
