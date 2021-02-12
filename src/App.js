@@ -19,6 +19,7 @@ class App extends Component {
   state = {
     characters: [],
     languages: [],
+    cities: [],
     person:[],
     showCreate: false,
     createBtn: "Create Person",
@@ -29,32 +30,45 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    let peopleAndLanguages = await peopleService.getAll();
-    console.log("componentDidMount", peopleAndLanguages);
+    let peopleCitiesAndLanguages = await peopleService.getAll();
+    console.log("componentDidMount", peopleCitiesAndLanguages);
+    this.setState({
+      characters: peopleCitiesAndLanguages.peopleList,
+      languages: peopleCitiesAndLanguages.languages,
+      cities: peopleCitiesAndLanguages.cities,
+    })
+  }
+
+  removeCharacter = async (index) => {
+    let removed = await peopleService.deletePerson(index);
+    console.log(removed)
+
+    if (removed){
+      let peopleAndLanguages = await peopleService.getAll();
+      console.log("Success")
     this.setState({
       characters: peopleAndLanguages.peopleList,
       languages: peopleAndLanguages.languages
     })
-  }
+    }
 
-  removeCharacter = (index) => {
-    const { characters } = this.state;
+    // const { characters } = this.state;
 
-    this.setState({
-      characters: characters.filter((characters, i) => {
-        return i !== index;
-      }),
-    });
+    // this.setState({
+    //   characters: characters.filter((characters, i) => {
+    //     return i !== index;
+    //   }),
+    // });
   };
 
   handleSubmit = async (character) => {
     console.log(character)
     let newPerson = await peopleService.createPerson(character);
-    let peopleList = await peopleService.getAll();
+    let peopleAndLanguages = await peopleService.getAll();
 
     console.log("response: ", newPerson)
     this.setState({
-        characters: peopleList,
+        characters: peopleAndLanguages.peopleList,
         showCreate: false,
         createBtn: "Create Person"
     })
@@ -125,10 +139,11 @@ class App extends Component {
   render() {
     const { 
       characters, 
+      languages,
+      cities, 
       createBtn,
       personId, 
       detailsBtn, 
-      languages, 
       person 
     } = this.state;
 
@@ -154,7 +169,8 @@ class App extends Component {
               <Col>
                 <Form 
                 handleSubmit={this.handleSubmit} 
-                languages={languages}/>
+                languages={languages}
+                cities={cities}/>
               </Col>
             </Row>
           ) : this.state.showDetails ? (

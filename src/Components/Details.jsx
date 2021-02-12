@@ -6,13 +6,14 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button"
 
 const Details = (props) => {
-  console.log(props.person.languages)
-  const { id, name, phoneNum, city } = props.person;
+  const { id, name, } = props.person;
+  //const { city } = props.person.city.name; 
   const { detailsBtn } = props; 
   const listItems = props.person.languages.map((item, index) => {
-      return (<li key={index}>{item.language.name}</li>)
-    });
-
+    return (<li key={index}>{item.language.name}</li>)
+  });
+  
+  console.log(props.person.city.country)
   return (
     <Container>
       <Row>
@@ -23,11 +24,11 @@ const Details = (props) => {
       <Row>
         <Col>
           <h5>City:</h5>
-          <p>{city}</p>
+          <p>{props.person.city.name}</p>
         </Col>
         <Col>
-          <h5>Phone Number:</h5>
-          <p>{phoneNum}</p>
+          <h5>Country:</h5>
+          <p>{props.person.city.country.name}</p>
         </Col>
       </Row>
       <Row>

@@ -32,11 +32,20 @@ class peopleService {
   }
 
   async createPerson(personData) {
-    var data = JSON.stringify(personData);
+    axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+
+    const person = {
+      Name: personData.name,
+      PhoneNum: personData.phoneNum,
+      City: personData.city,
+      LanguageId: parseInt(personData.language)
+    }
+    
+    console.log(person);
     var config = {
       method: "post",
       url: "https://localhost:44331/api/React",
-      data: data,
+      data: person,
     };
 
     return await axios(config)
@@ -50,6 +59,25 @@ class peopleService {
   }
 
   async editPerson(editData) {}
+
+  async deletePerson(id) {
+    //axios.defaults.headers.delete['Content-Type'] = 'application/json;charset=utf-8';
+    var config = {
+      headers:'application/json',
+      data: id,
+    }
+
+    return await axios
+      .delete("https://localhost:44331/api/React", config)
+      .then((response) => {
+        console.log(response)
+        return response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+
+  }
 }
 
 export default new peopleService();

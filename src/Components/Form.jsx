@@ -3,9 +3,9 @@ import React, { Component } from "react";
 class Form extends Component {
   state = {
     name: "",
-    city: "",
     phoneNum: "",
-    languages: [],
+    city: "",
+    language: "",
   };
 
   handleChange = (event) => {
@@ -16,25 +16,25 @@ class Form extends Component {
       });
     }
 
-  handleLanguages = (event) => {
-    console.log(event.target.value);
-    const { value } = event.target;
+  // handleLanguages = (event) => {
+  //   console.log(event.target.value);
+  //   const { value } = event.target;
 
-    for (let i = 0; i < this.state.languages.length; i++) {
-      if (value === this.state.languages[i]) {
+  //   for (let i = 0; i < this.state.languages.length; i++) {
+  //     if (value === this.state.languages[i]) {
 
-        let filteredArray = this.state.languages.filter(
-          language => language !== value
-        )
-        this.setState({languages: filteredArray})
-        return;
-      }
-    }
+  //       let filteredArray = this.state.languages.filter(
+  //         language => language !== value
+  //       )
+  //       this.setState({languages: filteredArray})
+  //       return;
+  //     }
+  //   }
 
-    this.setState((prevState) => ({
-      languages: [...prevState.languages, value],
-    }));
-  };
+  //   this.setState((prevState) => ({
+  //     languages: [...prevState.languages, value],
+  //   }));
+  // };
 
   submitForm = () => {
     this.props.handleSubmit(this.state);
@@ -42,10 +42,14 @@ class Form extends Component {
   };
 
   render() {    
-    const { name, city, phoneNum } = this.state;
-    const { languages } = this.props;
+    const { name, city, language } = this.state;
+    const { languages, cities } = this.props;
 
-    const listItems = languages.map((item, index) => {
+    const languageItems = languages.map((item, index) => {
+      return (<option key={index} value={item.id}>{item.name}</option>)
+    });
+
+    const cityItems = cities.map((item, index) => {
       return (<option key={index} value={item.name}>{item.name}</option>)
     });
 
@@ -65,16 +69,17 @@ class Form extends Component {
         </div>
         <div className="form-group">
           <label htmlFor="city">City</label>
-          <input
+          <select
             className="form-control"
-            type="text"
-            name="city"
             id="city"
+            name="city"
             value={city}
-            onChange={this.handleChange}
-          />
+            onClick={this.handleChange}
+          >
+            {cityItems}
+          </select>
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <label htmlFor="phoneNum">Phone number:</label>
           <input
             className="form-control"
@@ -84,20 +89,19 @@ class Form extends Component {
             value={phoneNum}
             onChange={this.handleChange}
           />
-        </div>
+        </div> */}
         <div className="form-group">
           <label htmlFor="language">
-            Language(s): {this.state.languages}
+            Language:
           </label>
           <select
-            multiple
             className="form-control"
             id="language"
             name="language"
-            value={languages}
-            onClick={this.handleLanguages}
+            value={language.id}
+            onClick={this.handleChange}
           >
-            {listItems}
+            {languageItems}
           </select>
         </div>
         <div className="form-group">
