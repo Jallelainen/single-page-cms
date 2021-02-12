@@ -27,6 +27,8 @@ class App extends Component {
     detailsBtn: "Show Details",
     showEdit: false,
     personId: 0,
+    sortByAlpha: false,
+    sortBtn: "Name"
   };
 
   async componentDidMount() {
@@ -135,6 +137,18 @@ class App extends Component {
     this.setState({ personId: index, showDetails: false, showEdit: true });
   };
 
+  sortOrder = () =>{
+    const {sortByAlpha} = this.state;
+
+    if(sortByAlpha === false){
+      this.setState({ sortByAlpha: true, sortBtn: "Database" })
+      console.log(sortByAlpha)
+    }
+    else{
+      this.setState({ sortByAlpha: false, sortBtn: "Name" })
+      console.log(sortByAlpha)
+    }
+  }
 
   render() {
     const { 
@@ -144,9 +158,12 @@ class App extends Component {
       createBtn,
       personId, 
       detailsBtn, 
-      person 
+      person, 
+      sortByAlpha,
+      sortBtn
     } = this.state;
 
+    console.log(sortByAlpha)
     return (
       <Container fluid>
         <Header />
@@ -158,6 +175,9 @@ class App extends Component {
                 characterData={characters}
                 removeCharacter={this.removeCharacter}
                 openDetails={this.openDetails}
+                sortOrder={this.sortOrder}
+                sortByAlpha={sortByAlpha}
+                sortBtn={sortBtn}
               />
               <Button variant="primary" onClick={this.openCreate}>
                 {createBtn}

@@ -36,8 +36,7 @@ class peopleService {
 
     const person = {
       Name: personData.name,
-      PhoneNum: personData.phoneNum,
-      City: personData.city,
+      CityId: parseInt(personData.city),
       LanguageId: parseInt(personData.language)
     }
     

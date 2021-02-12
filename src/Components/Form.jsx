@@ -3,9 +3,8 @@ import React, { Component } from "react";
 class Form extends Component {
   state = {
     name: "",
-    phoneNum: "",
-    city: "",
-    language: "",
+    city: this.props.cities[0].id,
+    language: this.props.languages[0].id,
   };
 
   handleChange = (event) => {
@@ -50,9 +49,10 @@ class Form extends Component {
     });
 
     const cityItems = cities.map((item, index) => {
-      return (<option key={index} value={item.name}>{item.name}</option>)
+      return (<option key={index} value={item.id}>{item.name}</option>)
     });
 
+    console.log(this.state)
     return (
       <form>
         <h4>Create new person</h4>
@@ -74,7 +74,7 @@ class Form extends Component {
             id="city"
             name="city"
             value={city}
-            onClick={this.handleChange}
+            onChange={this.handleChange}
           >
             {cityItems}
           </select>
