@@ -57,7 +57,7 @@ class Form extends Component {
   };
 
   render() {
-    const { name, city, language, errorMessage, disabled } = this.state;
+    const { name, city, language, errorMessage } = this.state;
     const { languages, cities } = this.props;
 
     const languageItems = languages.map((item, index) => {

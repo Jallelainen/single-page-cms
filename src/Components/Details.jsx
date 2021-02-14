@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button"
 
 const Details = (props) => {
-  const { name, } = props.person; //id,
+  const { id, name } = props.person; //id,
   const { detailsBtn } = props; 
   const listItems = props.person.languages.map((item, index) => {
     return (<li key={index}>{item.language.name}</li>)
@@ -38,6 +38,9 @@ const Details = (props) => {
         </Col>
         <Col>
             {/* <Button className="mr-2" variant="secondary" onClick={() => props.openEdit(id)}>Edit</Button> */}
+            <Button variant="danger" className="mr-2" onClick={() => props.removeCharacter(id)}>
+            Delete
+          </Button>
             <Button onClick={() => props.closeDetails()}>{detailsBtn}</Button>
         </Col>
       </Row>

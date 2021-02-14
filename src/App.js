@@ -50,7 +50,9 @@ class App extends Component {
       console.log("Success")
     this.setState({
       characters: peopleAndLanguages.peopleList,
-      languages: peopleAndLanguages.languages
+      languages: peopleAndLanguages.languages,
+      showCreate: false,
+      showDetails: false
     })
     }
   };
@@ -184,10 +186,11 @@ class App extends Component {
               <Col>
                 <Details
                   person={person[0]}
-                  personId={personId}
+                  
                   detailsBtn={detailsBtn}
                   closeDetails={this.closeDetails}
                   openEdit={this.openEdit}
+                  removeCharacter={this.removeCharacter}
                 />
               </Col>
             </Row>
