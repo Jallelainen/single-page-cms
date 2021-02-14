@@ -207,7 +207,7 @@ class App extends Component {
             <Row></Row>
           )}
         </Container>
-        <Footer/>
+        <Footer />
       </Container>
     );
   }

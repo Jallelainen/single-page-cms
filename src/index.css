@@ -23,3 +23,7 @@
 .spacer{
     height: 80px;
 }
+
+.errorSpan{
+    color: orangered
+}

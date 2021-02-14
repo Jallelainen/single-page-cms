@@ -5,17 +5,29 @@ class Form extends Component {
     name: "",
     city: this.props.cities[0].id,
     language: this.props.languages[0].id,
-    nameIsValid: true,
+    formIsValid: false,
     errorMessage: "",
   };
 
   handleChange = (event) => {
     const { name, value } = event.target;
 
-    this.setState({
-      [name]: value,   
-    });
+    
+    if (value.length > 2 && value.length < 27) {
+      this.setState({
+        [name]: value,
+        formIsValid: true,
+        errorMessage: "",
+      });
+    }else{
+      this.setState({
+        [name]: value,
+        formIsValid: false,
+        errorMessage: "Name needs to be at least 3, and less than 27 characters",
+      })
     }
+
+  };
 
   // handleLanguages = (event) => {
   //   console.log(event.target.value);
@@ -38,20 +50,30 @@ class Form extends Component {
   // };
 
   submitForm = () => {
-    this.props.handleSubmit(this.state);
-    this.setState(this.initialState);
+    if (this.state.formIsValid) {
+      this.props.handleSubmit(this.state);
+      this.setState(this.initialState);
+    }
   };
 
-  render() {    
-    const { name, city, language, errorMessage } = this.state;
+  render() {
+    const { name, city, language, errorMessage, disabled } = this.state;
     const { languages, cities } = this.props;
 
     const languageItems = languages.map((item, index) => {
-      return (<option key={index} value={item.id}>{item.name}</option>)
+      return (
+        <option key={index} value={item.id}>
+          {item.name}
+        </option>
+      );
     });
 
     const cityItems = cities.map((item, index) => {
-      return (<option key={index} value={item.id}>{item.name}</option>)
+      return (
+        <option key={index} value={item.id}>
+          {item.name}
+        </option>
+      );
     });
 
     return (
@@ -59,7 +81,8 @@ class Form extends Component {
         <h4>Create new person</h4>
         <div className="form-group">
           <label htmlFor="name">Name</label>
-          <input required
+          <input
+            required
             className="form-control"
             type="text"
             name="name"
@@ -67,7 +90,7 @@ class Form extends Component {
             value={name}
             onChange={this.handleChange}
           />
-          <span>{errorMessage}</span>
+          <span className="errorSpan">{errorMessage}</span>
         </div>
         <div className="form-group">
           <label htmlFor="city">City</label>
@@ -93,9 +116,7 @@ class Form extends Component {
           />
         </div> */}
         <div className="form-group">
-          <label htmlFor="language">
-            Language:
-          </label>
+          <label htmlFor="language">Language:</label>
           <select
             className="form-control"
             id="language"
